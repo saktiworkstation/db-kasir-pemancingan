@@ -1,130 +1,130 @@
-# Fishing Pond Management System Database
+# Sistem Basis Data Manajemen Pemancingan
 
-This repository contains the SQL scripts and explanations for creating and managing a Fishing Pond Management System database. The database includes tables for customers, employees, fishing spots, equipment, sales, sale details, bookings, and payments.
+Repositori ini berisi skrip SQL dan penjelasan untuk membuat dan mengelola basis data Sistem Manajemen Pemancingan. Basis data ini mencakup tabel untuk pelanggan, karyawan, spot pemancingan, peralatan, penjualan, detail penjualan, pemesanan, dan pembayaran.
 
-## Database Structure
+## Struktur Basis Data
 
-### Tables
+### Tabel
 
 1. **Customers**
-   - Stores information about the customers.
-   - Columns: `CustomerID`, `Name`, `Phone`, `Email`, `Address`
+   - Menyimpan informasi tentang pelanggan.
+   - Kolom: `CustomerID`, `Name`, `Phone`, `Email`, `Address`
 
 2. **Employees**
-   - Stores information about the employees.
-   - Columns: `EmployeeID`, `Name`, `Position`, `HireDate`, `Salary`
+   - Menyimpan informasi tentang karyawan.
+   - Kolom: `EmployeeID`, `Name`, `Position`, `HireDate`, `Salary`
 
 3. **FishingSpots**
-   - Stores information about the fishing spots.
-   - Columns: `SpotID`, `Name`, `Location`, `PricePerHour`
+   - Menyimpan informasi tentang spot pemancingan.
+   - Kolom: `SpotID`, `Name`, `Location`, `PricePerHour`
 
 4. **Equipment**
-   - Stores information about the fishing equipment available for rent.
-   - Columns: `EquipmentID`, `Name`, `Type`, `Price`, `Quantity`
+   - Menyimpan informasi tentang peralatan pemancingan yang tersedia untuk disewa.
+   - Kolom: `EquipmentID`, `Name`, `Type`, `Price`, `Quantity`
 
 5. **Sales**
-   - Stores information about the sales transactions.
-   - Columns: `SaleID`, `CustomerID`, `EmployeeID`, `SaleDate`, `TotalAmount`
+   - Menyimpan informasi tentang transaksi penjualan.
+   - Kolom: `SaleID`, `CustomerID`, `EmployeeID`, `SaleDate`, `TotalAmount`
 
 6. **SaleDetails**
-   - Stores detailed information about each sale.
-   - Columns: `SaleDetailID`, `SaleID`, `EquipmentID`, `Quantity`, `Price`
+   - Menyimpan informasi detail tentang setiap penjualan.
+   - Kolom: `SaleDetailID`, `SaleID`, `EquipmentID`, `Quantity`, `Price`
 
 7. **Bookings**
-   - Stores information about the fishing spot bookings.
-   - Columns: `BookingID`, `CustomerID`, `SpotID`, `BookingDate`, `StartTime`, `EndTime`, `TotalPrice`
+   - Menyimpan informasi tentang pemesanan spot pemancingan.
+   - Kolom: `BookingID`, `CustomerID`, `SpotID`, `BookingDate`, `StartTime`, `EndTime`, `TotalPrice`
 
 8. **Payments**
-   - Stores information about the payments made for sales.
-   - Columns: `PaymentID`, `SaleID`, `PaymentDate`, `Amount`, `PaymentMethod`
+   - Menyimpan informasi tentang pembayaran yang dilakukan untuk penjualan.
+   - Kolom: `PaymentID`, `SaleID`, `PaymentDate`, `Amount`, `PaymentMethod`
 
-### Functions
+### Fungsi
 
 - **GetTotalSales**
-  - Returns the total amount of all sales.
+  - Mengembalikan jumlah total dari semua penjualan.
 
 - **GetEquipmentPrice**
-  - Returns the price for a given equipment and quantity.
+  - Mengembalikan harga untuk peralatan tertentu dan jumlahnya.
 
-### Procedures
+### Prosedur
 
 - **GetAllCustomers**
-  - Retrieves all customers.
+  - Mengambil semua pelanggan.
 
 - **GetBookingDetails**
-  - Retrieves booking details for a specific customer on a specific date.
+  - Mengambil detail pemesanan untuk pelanggan tertentu pada tanggal tertentu.
 
 - **CheckSalary**
-  - Checks and updates the salary of an employee if it is below a certain amount.
+  - Memeriksa dan memperbarui gaji karyawan jika di bawah jumlah tertentu.
 
-### Triggers
+### Pemicu (Trigger)
 
 - **BeforeCustomerInsert**
-  - Logs an action before a customer is inserted.
+  - Mencatat tindakan sebelum pelanggan dimasukkan.
 
 - **BeforeCustomerUpdate**
-  - Logs an action before a customer is updated.
+  - Mencatat tindakan sebelum pelanggan diperbarui.
 
 - **BeforeCustomerDelete**
-  - Logs an action before a customer is deleted.
+  - Mencatat tindakan sebelum pelanggan dihapus.
 
 - **AfterCustomerInsert**
-  - Logs an action after a customer is inserted.
+  - Mencatat tindakan setelah pelanggan dimasukkan.
 
 - **AfterCustomerUpdate**
-  - Logs an action after a customer is updated.
+  - Mencatat tindakan setelah pelanggan diperbarui.
 
 - **AfterCustomerDelete**
-  - Logs an action after a customer is deleted.
+  - Mencatat tindakan setelah pelanggan dihapus.
 
-### Indexes
+### Indeks
 
 - **Primary Key Index**
-  - Created on `NewTable`.
+  - Dibuat pada `NewTable`.
 
 - **Composite Index on Sales**
-  - Created on `Sales` table for `CustomerID` and `EmployeeID`.
+  - Dibuat pada tabel `Sales` untuk `CustomerID` dan `EmployeeID`.
 
 - **Composite Index on Equipment**
-  - Created on `Equipment` table for `Name` and `Type`.
+  - Dibuat pada tabel `Equipment` untuk `Name` dan `Type`.
 
-### Views
+### Tampilan (View)
 
 - **HorizontalView**
-  - Selects specific columns from the `Customers` table.
+  - Memilih kolom tertentu dari tabel `Customers`.
 
 - **VerticalView**
-  - Selects specific rows from the `Customers` table.
+  - Memilih baris tertentu dari tabel `Customers`.
 
 - **InnerView**
-  - Selects rows from the `Customers` table based on another view with a `WITH CHECK OPTION`.
+  - Memilih baris dari tabel `Customers` berdasarkan tampilan lain dengan `WITH CHECK OPTION`.
 
-### Database Security
+### Keamanan Basis Data
 
-- **Users**
-  - `user1`, `user2`, `user3` with respective passwords.
+- **Pengguna**
+  - `user1`, `user2`, `user3` dengan kata sandi masing-masing.
 
-- **Roles**
+- **Peran**
   - `finance`, `human_dev`, `warehouse`.
 
-- **Privileges**
-  - Granted various privileges to users and roles for accessing tables, views, and procedures.
+- **Hak Istimewa**
+  - Diberikan berbagai hak akses kepada pengguna dan peran untuk mengakses tabel, tampilan, dan prosedur.
 
-## Sample Data Insertion
+## Penyisipan Data Contoh
 
-The script includes commands to insert sample data into each table, ensuring the database is populated for testing and development purposes.
+Skrip ini mencakup perintah untuk menyisipkan data contoh ke dalam setiap tabel, memastikan basis data terisi untuk keperluan pengujian dan pengembangan.
 
-## Usage
+## Penggunaan
 
-To set up and use this database, follow these steps:
+Untuk mengatur dan menggunakan basis data ini, ikuti langkah-langkah berikut:
 
-1. Execute the provided SQL script in your MySQL Workbench.
-2. Ensure all tables, functions, procedures, triggers, indexes, views, and security settings are created successfully.
-3. Insert the sample data provided in the script.
-4. Test the functions, procedures, and triggers to verify they work as expected.
-5. Use the views to simplify data retrieval and manipulation.
-6. Manage user access and privileges using the security settings.
+1. Eksekusi skrip SQL yang disediakan di MySQL Workbench Anda.
+2. Pastikan semua tabel, fungsi, prosedur, pemicu, indeks, tampilan, dan pengaturan keamanan berhasil dibuat.
+3. Masukkan data contoh yang disediakan dalam skrip.
+4. Uji fungsi, prosedur, dan pemicu untuk memastikan mereka bekerja sesuai yang diharapkan.
+5. Gunakan tampilan untuk menyederhanakan pengambilan dan manipulasi data.
+6. Kelola akses pengguna dan hak istimewa menggunakan pengaturan keamanan.
 
-## License
+## Lisensi
 
-This project is licensed under the MIT License.
+Proyek ini dilisensikan di bawah Lisensi MIT.
