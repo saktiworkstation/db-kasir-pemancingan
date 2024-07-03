@@ -1,33 +1,46 @@
 use uas_pbd_pemancingan;
 
 -- a. Function
+DELIMITER //
 CREATE FUNCTION GetTotalSales() RETURNS DECIMAL(10, 2)
 BEGIN
     DECLARE total DECIMAL(10, 2);
     SELECT SUM(TotalAmount) INTO total FROM Sales;
     RETURN total;
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE FUNCTION GetEquipmentPrice(equip_id INT, qty INT) RETURNS DECIMAL(10, 2)
 BEGIN
     DECLARE price DECIMAL(10, 2);
     SELECT Price * qty INTO price FROM Equipment WHERE EquipmentID = equip_id;
     RETURN price;
 END;
+//
+DELIMITER ;
 
-SHOW FUNCTION STATUS WHERE Db = 'uas_pbd_pemancingan';
+SHOW FUNCTION STATUS WHERE Db = 'your_database_name';
 
 -- b. Procedure
+DELIMITER //
 CREATE PROCEDURE GetAllCustomers()
 BEGIN
     SELECT * FROM Customers;
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE PROCEDURE GetBookingDetails(cust_id INT, book_date DATE)
 BEGIN
     SELECT * FROM Bookings WHERE CustomerID = cust_id AND BookingDate = book_date;
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE PROCEDURE CheckSalary(emp_id INT)
 BEGIN
     DECLARE salary DECIMAL(10, 2);
@@ -36,8 +49,10 @@ BEGIN
         UPDATE Employees SET Salary = Salary + 500000 WHERE EmployeeID = emp_id;
     END IF;
 END;
+//
+DELIMITER ;
 
-SHOW PROCEDURE STATUS WHERE Db = 'uas_pbd_pemancingan';
+SHOW PROCEDURE STATUS WHERE Db = 'your_database_name';
 
 -- c. Trigger
 CREATE TABLE Log (
@@ -46,41 +61,59 @@ CREATE TABLE Log (
     LogDate DATETIME
 );
 
+DELIMITER //
 CREATE TRIGGER BeforeCustomerInsert BEFORE INSERT ON Customers
 FOR EACH ROW
 BEGIN
     INSERT INTO Log (Description, LogDate) VALUES ('Customer Inserted', NOW());
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE TRIGGER BeforeCustomerUpdate BEFORE UPDATE ON Customers
 FOR EACH ROW
 BEGIN
     INSERT INTO Log (Description, LogDate) VALUES ('Customer Updated', NOW());
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE TRIGGER BeforeCustomerDelete BEFORE DELETE ON Customers
 FOR EACH ROW
 BEGIN
     INSERT INTO Log (Description, LogDate) VALUES ('Customer Deleted', NOW());
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE TRIGGER AfterCustomerInsert AFTER INSERT ON Customers
 FOR EACH ROW
 BEGIN
     INSERT INTO Log (Description, LogDate) VALUES ('Customer Inserted', NOW());
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE TRIGGER AfterCustomerUpdate AFTER UPDATE ON Customers
 FOR EACH ROW
 BEGIN
     INSERT INTO Log (Description, LogDate) VALUES ('Customer Updated', NOW());
 END;
+//
+DELIMITER ;
 
+DELIMITER //
 CREATE TRIGGER AfterCustomerDelete AFTER DELETE ON Customers
 FOR EACH ROW
 BEGIN
     INSERT INTO Log (Description, LogDate) VALUES ('Customer Deleted', NOW());
 END;
+//
+DELIMITER ;
 
 SHOW TRIGGERS;
 
